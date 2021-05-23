@@ -26,9 +26,9 @@ def dijkstra(graph, s=0):
     Dijkstra's algorithm for shortest paths in
     weighted graphs. Algorith is not correct if weights
     of the edges are negative numbers.
-    :param graph: representation of a graph as
+    :param graph: representation of a graph as set of edges.
     :param s: starting vertex.
-    :return: two lists: distances (shortes path to vertex on n-th index
+    :return: two lists: distances, parents.
     """
     n = graph.size
     queue = PriorityQueue()
@@ -40,6 +40,7 @@ def dijkstra(graph, s=0):
     parents = [None for _ in range(n)]
     distances = [float("inf") for _ in range(n)]
     distances[s] = 0
+
     while not queue.empty():
         v = queue.get()
         length = len(graph.graph_repr[v[1]])
