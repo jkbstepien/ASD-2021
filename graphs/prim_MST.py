@@ -18,7 +18,7 @@ def prim_mst(graph, s=0):
     :param graph: representation of a graph as a set of edges.
     :param s: starting vertex.
     :return: list of edges in MST where each elem is a tuple
-    (u, v, weight).
+    (u, v, distances).
     """
     n = graph.size
     queue = PriorityQueue()

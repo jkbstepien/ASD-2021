@@ -19,7 +19,7 @@ def kruskal_mst(graph):
     Kruskal's algorithm for finding MST.
     :param graph: representation of a graph as a set of edges.
     :return: list of edges in MST where each elem is a tuple
-    (weight, u, v).
+    (distances, u, v).
     """
     n = graph.size
     graph.edges.sort()

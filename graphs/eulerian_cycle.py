@@ -3,8 +3,8 @@ from copy import deepcopy
 
 def euler(G):
     """
-    Function checks whether graph G has an Euler Cycle.
-    :param G: Matrix representation of a graph G.
+    Function checks whether graph graph has an Euler Cycle.
+    :param G: Matrix representation of a graph graph.
     :return: List of consecutive vertexes in cycle.
     """
     route = []
@@ -13,7 +13,7 @@ def euler(G):
         """
         DFS visit algorithm. Every visited edge is
         marked as 'x'.
-        :param u: A vertex in graph G.
+        :param u: A vertex in graph graph.
         """
 
         for v in range(len(G)):
@@ -28,7 +28,7 @@ def euler(G):
     return route
 
 
-# Tests for function euler(G).
+# Tests for function euler(graph).
 # We assume that graph has Eulerian cycle.
 if __name__ == "__main__":
     G = [[0, 1, 1, 0, 0, 0],
