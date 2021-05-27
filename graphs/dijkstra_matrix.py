@@ -30,9 +30,6 @@ def dijkstra(graph, s=0):
     n = len(graph)
     queue = PriorityQueue()
 
-    # for vertex in range(n):
-    #     queue.put((float("inf"), vertex))
-
     infinity = [True for _ in range(n)]
     parents = [None for _ in range(n)]
     distances = [float("inf") for _ in range(n)]
