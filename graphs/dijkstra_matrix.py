@@ -45,10 +45,6 @@ def dijkstra(graph, s=0):
         _, v = queue.get()
         for u in range(n):
             if graph[v][u] > 0:
-                # if distances[v] > distances[u] + graph[v][u]:
-                #     distances[v] = distances[u] + graph[v][u]
-                #     parents[v] = u
-                #     queue.put((distances[u], u))
                 if relax(distances, parents, infinity, v, u, graph[v][u]):
                     queue.put((distances[u], u))
 
