@@ -12,11 +12,11 @@ class WeightedGraph:
         """
         Function populates 2D array graph_repr in form:
         [ [vertex_num, tuple, tuple,..], ... ]
-        where tuple's first element is distances of edge between u and v,
-        second element stands for num of vertex u/v.
+        where tuple's first element is distances of edge between v and u,
+        second element stands for num of vertex v/u.
         :param u: first vertex.
         :param v: second vertex.
-        :param weight: distances of an edge between u and v.
+        :param weight: distances of an edge between v and u.
         """
         self.graph_repr[u].append((weight, v))
         self.graph_repr[v].append((weight, u))
@@ -28,7 +28,7 @@ def prim_mst(graph, s=0):
     :param graph: representation of a graph as a set of edges.
     :param s: starting vertex.
     :return: list of edges in MST where each elem is a tuple
-    (u, v, distances).
+    (v, u, distances).
     """
     n = graph.size
     queue = PriorityQueue()
@@ -44,7 +44,7 @@ def prim_mst(graph, s=0):
     weights_min[s] = 0
 
     while not queue.empty():
-        # get v as pair (distances, vertex num)
+        # get u as pair (distances, vertex num)
         v = queue.get()
         visited[v[1]] = True
         for u in graph.graph_repr[v[1]][1:]:

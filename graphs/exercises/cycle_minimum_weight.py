@@ -73,7 +73,7 @@ def min_cycle(graph):
                 edge_weight = graph[v][u]
                 graph[v][u] = graph[u][v] = 0
 
-                # do dijkstra and return list of parents and shortest path between v and u
+                # do dijkstra and return list of parents and shortest path between u and v
                 parents, pathvu = mod_dijkstra(graph, u, v)
                 # add weight of deleted edge
                 pathvu += edge_weight
