@@ -25,6 +25,18 @@ def transitive_closure_naive_matrix(graph):
     return graph
 
 
+def dfs_util(graph, matrix, s, t):
+    """
+    Utility function for transitive closure.
+    """
+    for j in graph[t]:
+        # if 'j' is adjacent vertex of t, that means
+        # path from s to j has been found.
+        if matrix[s][j] == 0:
+            matrix[s][j] = 1
+            dfs_util(graph, matrix, s, j)
+
+
 def transitive_closure(graph):
     """
     Function computes reachability matrix.
@@ -35,17 +47,6 @@ def transitive_closure(graph):
     """
     n = len(graph)
     matrix = [[0 for _ in range(n)] for _ in range(n)]
-
-    def dfs_util(graph, matrix, s, t):
-        """
-        Utility function for transitive closure.
-        """
-        for j in graph[t]:
-            # if 'j' is adjacent vertex of t, that means
-            # path from s to j has been found.
-            if matrix[s][j] == 0:
-                matrix[s][j] = 1
-                dfs_util(graph, matrix, s, j)
 
     for i in range(n):
         matrix[i][i] = 1
@@ -72,10 +73,21 @@ if __name__ == "__main__":
     # [[1, 1, 1, 0, 1], [0, 0, 0, 0, 1], [1, 1, 1, 0, 1], [1, 1, 1, 0, 1], [0, 0, 0, 0, 1]]
     print(f"naive: {transitive_closure_naive_matrix(G2)}")
 
-    G3 = [[1, 2], [4], [1, 0], [2, 4], []]
+    G3 = [
+        [1, 2],
+        [4],
+        [1, 0],
+        [2, 4],
+        []
+    ]
     # Should print: [[1, 1, 1, 0, 1], [0, 1, 0, 0, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 1], [0, 0, 0, 0, 1]]
     print(f"adj_version: {transitive_closure(G3)}")
 
-    G4 = [[1, 2], [2], [0, 3], []]
+    G4 = [
+        [1, 2],
+        [2],
+        [0, 3],
+        []
+    ]
     # Should print: [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [0, 0, 0, 1]]
     print(f"adj_version: {transitive_closure(G4)}")
