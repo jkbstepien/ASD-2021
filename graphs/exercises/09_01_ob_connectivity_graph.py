@@ -1,4 +1,4 @@
-ef dfs(G):
+def dfs(G):
     n = len(G)
     visited = [False] * n
     result = []
