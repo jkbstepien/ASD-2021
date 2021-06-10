@@ -151,7 +151,6 @@ def inorder(root, res):
 
 if __name__ == "__main__":
 
-    nodes = [20, 10, 5, 15, 13, 27, 22, 30, 28, 35, 40]
     root = BSTNode(20)
     tree_insert(root, 10)
     tree_insert(root, 5)
@@ -165,8 +164,10 @@ if __name__ == "__main__":
     tree_insert(root, 40)
     print(inorder(root, []))
     print(tree_predecessor(tree_find(root, 20)))
+    print(tree_successor(tree_find(root, 22)))
 
     print("\nRemoving each node in a tree.")
+    nodes = [20, 10, 5, 15, 13, 27, 22, 30, 28, 35, 40]
     for node in nodes:
         root = tree_remove_node(root, node)
         print(inorder(root, []))
