@@ -59,6 +59,11 @@ def find_ith(tree, elem_idx):
                 elem_idx -= node.left.count_elem
             node = node.right
             elem_idx -= 1
+            if node.right:
+                # Case where there is no more left nodes, but exist
+                # further right node.
+                if node.count_elem - node.right.count_elem == elem_idx:
+                    return node.key
 
     return node.key
 
@@ -70,3 +75,10 @@ if __name__ == "__main__":
         print(v, insert(T, v))
     for i in range(1, 11):
         print(i, ":", find_ith(T, i))
+
+    tree = BSTree()
+    print("INSERTING")
+    for v in [10, 5, 2, 7, 9, 20]:
+        print(v, insert(tree, v))
+    for i in range(1, 7):
+        print(i, ":", find_ith(tree, i))
