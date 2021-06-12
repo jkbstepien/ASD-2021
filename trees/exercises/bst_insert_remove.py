@@ -2,6 +2,7 @@
 Offline nr 11.
 """
 
+
 class BSTNode:
     """
     Class represents a single node in BST tree.
@@ -13,8 +14,8 @@ class BSTNode:
         self.parent = None
 
 
-"""Funkcja do dodawania węzłów do drzewa."""
 def insert(leaf, key) -> (bool, BSTNode):
+    """Funkcja do dodawania węzłów do drzewa."""
     root_cpy = leaf
     prev = None
     while leaf is not None:
@@ -92,6 +93,7 @@ def tree_remove_node(leaf, key):
 
     return True
 
+
 def delete_root(leaf):
     if leaf.left is None and leaf.right is None:  # zadne dziecko nie istnieje
         return None
@@ -107,6 +109,7 @@ def delete_root(leaf):
         tree_remove_node(a, a.key)
 
     return leaf
+
 
 def tree_min(leaf):
     while leaf.left is not None:

@@ -8,6 +8,7 @@ class BSTNode:
         self.parent = None
         self.key = key
         self.value = value
+        self.count_elem = 1
 
 
 class BSTree:
@@ -84,22 +85,6 @@ class BSTree:
 
         return lst
 
-    def get_height(self, *args):
-        """
-        Obtain height of binary tree. Root + highest subtree.
-        """
-        if len(args) == 0:
-            node = self.root
-        else:
-            node = args[0]
-
-        if not node:
-            return 0
-        elif not node.left and not node.right:
-            return 1
-        else:
-            return 1 + max(self.get_height(node.left), self.get_height(node.right))
-
     def find(self, key, *args):
         """
         Find node in binary tree with key attribute key.
@@ -131,6 +116,7 @@ class BSTree:
         else:
             to_add = BSTNode(key, value)
             parent = args[0]
+            parent.count_elem += 1
             if to_add.key < parent.key:
                 if not parent.left:
                     parent.left = to_add
@@ -143,6 +129,22 @@ class BSTree:
                     to_add.parent = parent
                 else:
                     self.insert(key, value, parent.right)
+
+    def get_height(self, *args):
+        """
+        Obtain height of binary tree. Root + highest subtree.
+        """
+        if len(args) == 0:
+            node = self.root
+        else:
+            node = args[0]
+
+        if not node:
+            return 0
+        elif not node.left and not node.right:
+            return 1
+        else:
+            return 1 + max(self.get_height(node.left), self.get_height(node.right))
 
     def get_min(self, *args):
         """
@@ -171,6 +173,36 @@ class BSTree:
             return self.get_max(start.right)
         else:
             return start
+
+    def get_ith_elem(self, elem_idx):
+        """
+        Finds element with i-th size in a binary tree.
+        """
+        node = self.root
+        # Check if elem_idx is in tree range.
+        if elem_idx > node.count_elem:
+            return -1
+
+        while node.right is not None or node.left is not None:
+            # Check if we are in the right place in a tree.
+            if node.left is not None and node.left.count_elem + 1 == elem_idx:
+                return node.key
+            elif node.left is not None and node.left.count_elem >= elem_idx:
+                node = node.left
+            else:
+                # If not any of the above, try to go right and decrease
+                # index of element by how many nodes we've passed.
+                if node.left is not None:
+                    elem_idx -= node.left.count_elem
+                node = node.right
+                elem_idx -= 1
+                if node.right:
+                    # Case where there is no more left nodes, but exist
+                    # further right node.
+                    if node.count_elem - node.right.count_elem == elem_idx:
+                        return node.key
+
+        return node.key
 
     @staticmethod
     def delete_leaf(node):
@@ -287,18 +319,21 @@ class BSTree:
 def main():
     # Tests
     tree = BSTree()
-    tree.insert(10, None)
-    tree.insert(5, None)
-    tree.insert(2, None)
-    tree.insert(7, None)
-    tree.insert(9, None)
-    tree.insert(20, None)
+    nodes = [10, 5, 2, 7, 9, 20]
+    for node in nodes:
+        tree.insert(node, None)
+
     print(tree.inorder())
     print(tree.preorder())
     print(tree.postorder())
+
+    for i in range(1, 7):
+        print(f"{i} - elem : {tree.get_ith_elem(i)}")
+
     print(f"min: {tree.get_min().key}")
     print(f"max: {tree.get_max().key}")
     print(f"tree height: {tree.get_height()}")
+
     tree.delete(5)
     print(tree.inorder())
 
