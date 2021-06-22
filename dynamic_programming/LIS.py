@@ -21,10 +21,18 @@ def _lis(A):
     return max(F), F, P
 
 
+def print_solution(A, P, i):
+    if P[i] != -1:
+        print_solution(A, P, P[i])
+    print(A[i], end=" ")
+
+
 def main():
     # Tests for Longest Increasing Subsequence.
     A = [13, 7, 21, 42, 8, 2, 44, 53]
-    print(_lis(A))
+    result, f_array, p_array = _lis(A)
+    print_solution(A, p_array, len(A) - 1)
+    print()
     B = []
     print(_lis(B))
     C = [13]
